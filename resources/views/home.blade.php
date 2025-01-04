@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-لوحة التحم
+لوحة التحكم
 @stop
 @section('css')
 <!--  Owl-carousel css-->
