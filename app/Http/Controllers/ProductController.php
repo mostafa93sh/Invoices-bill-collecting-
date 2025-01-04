@@ -64,9 +64,20 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request)
     {
-        //
+        // dd($request->section_id);
+        $Products = Product::findOrFail($request->pro_id);
+        $Products->update([
+            'Product_name' => $request->Product_name,
+            'description' => $request->description,
+            
+            'section_id' => $request->section_id,
+            ]);
+     
+            session()->flash('Edit', 'تم تعديل المنتج بنجاح');
+            return back();
+             
     }
 
     /**
