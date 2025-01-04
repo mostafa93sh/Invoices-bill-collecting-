@@ -33,7 +33,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validatedRequest = $request->validate([
-            'Product_name'=>['required'],
+            'Product_name'=>['required','unique:products,Product_name'],
             'section_id'=>['required','exists:sections,id']
         ]);
         Product::create([
@@ -83,8 +83,11 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy(Request $request)
     {
-        //
+        $Products = Product::findOrFail($request->pro_id);
+        $Products->delete();
+        session()->flash('delete', 'تم حذف المنتج بنجاح');
+        return back();
     }
 }
