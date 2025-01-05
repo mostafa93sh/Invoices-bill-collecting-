@@ -6,6 +6,7 @@ use App\Models\Invoice;
 use App\Http\Controllers\Controller;
 use App\Models\Section;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class InvoiceController extends Controller
 
@@ -67,5 +68,12 @@ class InvoiceController extends Controller
     public function destroy(Invoice $invoice)
     {
         //
+    }
+
+    public function getProducts($id)
+    {
+        $products = DB::table("products")->where("section_id", $id)->pluck("Product_name", "id");
+       
+        return json_encode($products);
     }
 }

@@ -215,7 +215,10 @@
         $(document).ready(function() {
             $('select[name="Section"]').on('change', function() {
                 var SectionId = $(this).val();
+                console.log('log one', SectionId);
+
                 if (SectionId) {
+
                     $.ajax({
                         url: "{{ URL::to('section') }}/" + SectionId,
                         type: "GET",

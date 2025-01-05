@@ -33,6 +33,7 @@ Route::resource('invoices',InvoiceController::class)->middleware(['auth']);
 Route::resource('sections',SectionController::class)->except(['update','destroy'])->middleware(['auth']);
 Route::patch('sections/updates',[SectionController::class,'update'])->middleware(['auth']);
 Route::delete('sections/destroy',[SectionController::class,'destroy'])->middleware(['auth']);
+Route::get('/section/{id}', [InvoiceController::class,'getProducts'])->name('section.getProduct');
 //  products routes
 Route::resource('products', ProductController::class)->except(['update','destroy'])->middleware(['auth']);
 Route::patch('products/updates',[ProductController::class,'update'])->middleware(['auth']);
