@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\InvoicesDetailsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SectionController;
 use Illuminate\Support\Facades\Auth;
@@ -38,4 +39,10 @@ Route::get('/section/{id}', [InvoiceController::class,'getProducts'])->name('sec
 Route::resource('products', ProductController::class)->except(['update','destroy'])->middleware(['auth']);
 Route::patch('products/updates',[ProductController::class,'update'])->middleware(['auth']);
 Route::delete('products/destroy',[ProductController::class,'destroy'])->middleware(['auth']);
+// invoices details
+Route::get('InvoicesDetails/{id}',[InvoicesDetailsController::class,'edit'])->middleware('auth');
+Route::get('download/{invoice_number}/{file_name}', [InvoicesDetailsController::class,'get_file'])->middleware('auth');
+Route::get('View_file/{invoice_number}/{file_name}', [InvoicesDetailsController::class,'open_file'])->middleware('auth');
+Route::post('delete_file', [InvoicesDetailsController::class,'destroy'])->name('delete_file')->middleware('auth');
+// invoices
 Route::get('/{page}', [AdminController::class,'index']);
